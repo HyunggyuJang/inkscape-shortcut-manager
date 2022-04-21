@@ -1,5 +1,5 @@
 import threading
-import Xlib
+from Xlib.xobject.drawable import Window
 from Xlib.display import Display
 from Xlib import X, XK
 from Xlib.protocol import event
@@ -13,7 +13,7 @@ class Manager():
         self.screen = self.disp.screen()
         self.root = self.screen.root
 
-        self.inkscape = self.disp.create_resource_object('window', inkscape_id)
+        self.inkscape: Window = self.disp.create_resource_object('window', inkscape_id)
         self.mode = normal_mode
 
     def event(self, name, detail, state):
