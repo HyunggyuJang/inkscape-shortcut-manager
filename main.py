@@ -1,7 +1,7 @@
 import threading
 from Xlib.xobject.drawable import Window
 from Xlib.display import Display
-from Xlib import X, XK
+from Xlib import X, XK, error
 from Xlib.protocol import event
 
 from normal import normal_mode
@@ -21,7 +21,7 @@ class Manager():
             time=X.CurrentTime,
             root=self.root,
             window=self.inkscape,
-            same_screen=0, child=Xlib.X.NONE,
+            same_screen=0, child=X.NONE,
             root_x=0, root_y=0, event_x=0, event_y=0,
             state=state,
             detail=detail
@@ -100,7 +100,7 @@ def main():
                     listen = threading.Thread(target=create, args=[window.id])
                     listen.start()
 
-            except Xlib.error.BadWindow:
+            except error.BadWindow:
                 pass
 
 if __name__ == '__main__':
